@@ -1,6 +1,6 @@
 # GitHub Actions リモートデスクトップ
 
-GitHub Actions で Chrome、Firefox、Ubuntu KDE デスクトップ、または通常デスクトップをブラウザから利用するリポジトリです。
+GitHub Actions で Chrome をブラウザから利用するリポジトリです。
 
 ## 利用方法
 
