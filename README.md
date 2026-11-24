@@ -20,11 +20,8 @@ GitHub Actions で Chrome、Firefox、Ubuntu KDE デスクトップ、または�
 
 Chrome ワークフローには、ブラウザのプロファイルを次回の実行に引き継ぐ機能があります。利用にはリポジトリの **Settings → Secrets and variables → Actions → Repository secrets** で `CHROME_STATE_ENCRYPTION_KEY` を登録してください。
 
-キーは次のコマンドで生成できます。
-
-```sh
-openssl rand -base64 32
-```
+キーは次のサイトなどで生成できます
+https://www.luft.co.jp/cgi/randam.php
 
 出力された32バイトのBase64文字列をそのままシークレット値に設定します。実行ごとにキーを変更しないでください。
 
