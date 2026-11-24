@@ -22,6 +22,6 @@ GitHub Actions で Chrome をブラウザから利用するリポジトリです
 Chrome ワークフローには、ブラウザのプロファイルを次回の実行に引き継ぐ機能があります。利用にはリポジトリの **Settings → Secrets and variables → Actions → Repository secrets** で `CHROME_STATE_ENCRYPTION_KEY` を登録してください。
 
 キーは次のサイトなどで生成できます
-https://www.luft.co.jp/cgi/randam.php
+https://generate-random.org/base64-string
 
 出力された32バイトのBase64文字列をそのままシークレット値に設定します。実行ごとにキーを変更しないでください
