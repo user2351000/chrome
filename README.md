@@ -5,11 +5,7 @@ GitHub Actions で Chrome、Firefox、Ubuntu KDE デスクトップ、または�
 ## 利用方法
 
 1. GitHub のリポジトリページで **Actions** を開きます。
-2. 左側から起動する環境を選びます。
-   - Chrome
-   - Firefox
-   - Desktop
-   - Ubuntu KDE
+2. **Chrome**をクリックします
 3. **Run workflow** を押して起動します。
 4. 実行中のジョブを開き、ログから `https://<ランダム文字列>.trycloudflare.com` をブラウザで開きます。
 
