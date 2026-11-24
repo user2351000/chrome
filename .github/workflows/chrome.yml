@@ -49,6 +49,29 @@ jobs:
             echo "No previous Chrome profile found; starting with an empty profile."
           fi
 
+      - name: Get Selkies release
+        id: selkies
+        run: |
+          version="$(curl -fsSL https://raw.githubusercontent.com/linuxserver/docker-baseimage-selkies/master/Dockerfile \
+            | sed -n 's/^ARG SELKIES_RELEASE=//p' \
+            | head -n 1)"
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Could not determine the Selkies release from the baseimage Dockerfile." >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build Chrome with reduced touchpad scroll sensitivity
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          docker build \
+            --build-arg SELKIES_RELEASE="${{ steps.selkies.outputs.version }}" \
+            --secret id=github_token,env=GITHUB_TOKEN \
+            --file .github/docker/chrome-touchpad-scroll.Dockerfile \
+            --tag local/chrome-touchpad-scroll \
+            .
+
       - name: Start Docker
         id: start-chrome
         run: |
@@ -62,7 +85,7 @@ jobs:
             -e PUID="$(id -u)" \
             -e PGID="$(id -g)" \
             -e CHROME_CLI=https://duckduckgo.com/ \
-            ghcr.io/linuxserver/chrome
+            local/chrome-touchpad-scroll
 
       - name: Desktop URL https://<random-subdomain>.trycloudflare.com / Save profile and stop by opening http://127.0.0.1/
         run: |
