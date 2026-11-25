@@ -40,7 +40,7 @@ Chromeのみ、ログイン状態を次回の実行に引き継ぐ機能があ�
 
 キーは次のサイトなどで生成できます。
 
-https://generate-random.org/base64-string
+[![Generate Base64](https://img.shields.io/badge/Generate-Base64-blue?style=for-the-badge)](https://generate-random.org/base64-string)
 
 出力された32バイトのBase64文字列をそのままシークレット値に設定します。
 
