@@ -7,6 +7,8 @@ jobs:
   desktop:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Start Docker
         background: true
         run: |
@@ -19,10 +21,29 @@ jobs:
             -e FIREFOX_CLI=https://duckduckgo.com/ \
             ghcr.io/linuxserver/firefox
 
-      - name: Desktop URL https://<random-subdomain>.trycloudflare.com / Stop with curl x or x/ in Address Bar
+      - name: Start GitHub-authenticated desktop proxy
+        env:
+          GITHUB_OAUTH_CLIENT_ID: ${{ vars.GITHUB_OAUTH_CLIENT_ID }}
+          GITHUB_ALLOWED_USER_ID: ${{ github.actor_id }}
+        run: |
+          node .github/scripts/github-auth-proxy.js > "$RUNNER_TEMP/github-auth-proxy.log" 2>&1 &
+          proxy_pid=$!
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8080/health >/dev/null; then
+              exit 0
+            fi
+            if ! kill -0 "$proxy_pid" 2>/dev/null; then
+              cat "$RUNNER_TEMP/github-auth-proxy.log" >&2
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "GitHub-authenticated desktop proxy did not start in time." >&2
+          cat "$RUNNER_TEMP/github-auth-proxy.log" >&2
+          exit 1
+
+      - name: Desktop URL https://<random-subdomain>.trycloudflare.com (sign in with GitHub)
         run: |
           wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
           sudo dpkg -i cloudflared-linux-amd64.deb >/dev/null 2>&1
-          echo "<?php passthru('pkill cloudflared');" > index.php
-          sudo nohup php -S 0.0.0.0:80 2>/dev/null &
-          cloudflared tunnel --url http://localhost:3000
+          cloudflared tunnel --url http://localhost:8080
