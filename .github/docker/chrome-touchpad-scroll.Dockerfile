@@ -32,3 +32,5 @@ RUN cd /src/addons/selkies-dashboard \
 FROM ${CHROME_IMAGE}
 
 COPY --from=selkies-build /src/addons/selkies-dashboard/dist/ /usr/share/selkies/selkies-dashboard/
+COPY Google_Classroom_Logo.png /usr/share/selkies/selkies-dashboard/icon.png
+COPY Google_Classroom_Logo.png /usr/share/selkies/selkies-dashboard/icon-512.png

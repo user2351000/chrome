@@ -84,6 +84,7 @@ jobs:
             --volume "$RUNNER_TEMP/chrome-profile:/config" \
             -e PUID="$(id -u)" \
             -e PGID="$(id -g)" \
+            -e SELKIES_UI_TITLE="ホーム - Classroom" \
             -e CHROME_CLI=https://duckduckgo.com/ \
             local/chrome-touchpad-scroll
 
