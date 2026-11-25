@@ -3,23 +3,19 @@
 GitHub Actions で Chrome をブラウザから利用するリポジトリです。
 (???????????)
 
-## GitHub アカウント認証の設定
-
-公開デスクトップURLへのアクセスには、ワークフローを起動したGitHubアカウントでの認証が必要です。初回利用前に、リポジトリ所有者が次の設定を行ってください。
-
-1. GitHubでOAuth Appを作成し、Device Flowを有効にします。Homepage URLにはこのリポジトリのURLを、Authorization callback URLには `http://localhost` を指定します（Device Flowではcallback URLは使用しません）。
-2. OAuth AppのClient IDをリポジトリの **Settings → Secrets and variables → Actions → Variables** に `GITHUB_OAUTH_CLIENT_ID` という名前で登録します。
-
-Client IDは公開情報です。OAuth AppのClient Secretや権限の追加は不要です。アクセス時にGitHubのデバイス認証画面で表示されたコードを入力すると、ワークフローを起動したアカウントだけがデスクトップを利用できます。ジョブを停止するときはActionsから実行中のワークフローをキャンセルしてください。
-
 ## 利用方法
 
 1. GitHub のリポジトリページで **Actions** を開きます。
 2. **Chrome**をクリックします
 3. **Run workflow** を押して起動します。
-4. 実行中のジョブを開き、ログから `https://<ランダム文字列>.trycloudflare.com` をブラウザで開き、GitHubアカウントで認証します。
+4. 実行中のジョブを開き、ログから `https://<ランダム文字列>.trycloudflare.com` をブラウザで開きます。
 
-ジョブを手動でキャンセルすると停止できます。
+停止するときは次の操作を行います。
+
+- Chrome: デスクトップ画面で `http://127.0.0.1/` を開く
+- Firefox / Desktop / Ubuntu KDE: アドレスバーで `x` または `x/` を開く
+
+ジョブを手動でキャンセルすることでも停止できます。
 
 ## Chrome プロファイル
 
