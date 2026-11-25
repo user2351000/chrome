@@ -2,13 +2,12 @@
 
 GitHub Actions で Chrome をブラウザから利用するリポジトリです。
 
-[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/user2351000/chrome-github-actions-/generate)
-
 ## 利用方法
 
 ### 1. リポジトリをコピーする
 
-1. 上部の **Use this template** ボタンをクリックします。
+1.  [![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/user2351000/chrome-github-actions-/generate)
+このボタンをクリックします。
 2. GitHub のリポジトリ作成画面が開きます。
 3. **Owner** で自分のアカウントを選択します。
 4. **Repository name** に任意のリポジトリ名を入力します。
